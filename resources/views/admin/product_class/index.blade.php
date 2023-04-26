@@ -21,7 +21,8 @@
                 <tr>
                     <th>@lang('lang.image')</th>
                     <th>@lang('lang.name')</th>
-                    <th>@lang('lang.description')</th>
+                    <th>@lang('lang.products_count')</th>
+                    {{-- <th>@lang('lang.description')</th> --}}
                     <th>@lang('lang.sort')</th>
                     <th>@lang('lang.status')</th>
 
@@ -66,13 +67,14 @@
             },
             columnDefs: [ {
                 "targets": [0, 3],
-                "orderable": false,
+                "orderable": true,
                 "searchable": false
             } ],
             columns: [
                 { data: 'image', name: 'image'  },
                 { data: 'name', name: 'name'  },
-                { data: 'description', name: 'description'  },
+                { data: 'products_count', name: 'products_count'},
+                // { data: 'description', name: 'description'  },
                 { data: 'sort', name: 'sort'  },
                 { data: 'status', name: 'status'  },
 
