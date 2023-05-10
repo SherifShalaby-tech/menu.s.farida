@@ -35,9 +35,6 @@
     <td>
         {!! Form::text('sizes[' . $row_id . '][discount_end_date]', !empty($item->pivot->discount_end_date) ? @format_date($item->discount_end_date) : null, ['class' => 'form-control datepicker', 'placeholder' => __('lang.discount_end_date')]) !!}
     </td>
-    <td>
-        {!! Form::checkbox('sizes[' . $row_id . '][active]',  $item->pivot->active ? true : false, ['class']) !!}
-    </td> 
     <td> <button type="button" class="btn btn-danger btn-xs remove_row mt-2"><i class="fa fa-times"></i></button>
     </td>
 </tr>
