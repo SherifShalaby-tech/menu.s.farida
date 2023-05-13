@@ -166,7 +166,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                     <h3 class="font-semibold text-lg text-dark">{{ $item->name }}</h3>
                                 </div>
                                 <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
-                                    <h3 class="font-semibold text-lg text-dark">{{$item->attributes->size?$item->attributes->size->name:'' }}</h3>
+                                    <h3 class="font-semibold text-lg text-dark">{{$item->attributes->size?$item->attributes->size:'' }}</h3>
                                 </div>
                                 <div class="md:w-1/3 xs:w-5/12">
                                     <div class="flex flex-row qty_row justify-center w-full">
@@ -187,11 +187,11 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                 </div>
                             </div>
                             <p class="text-xs text-dark font-semibold">{!! $item->associatedModel->product_details !!}</p>
+                            
                             <h3
-                                class="font-semibold text-base text-dark py-2 @if ($item->associatedModel->variations->first()->name == 'Default') hidden @endif">
-                                @lang('lang.select_size')</h3>
+                                class="font-semibold text-base text-dark py-2 @if ($item->associatedModel->variations->first()->name == 'Default') hidden @endif"></h3>
                             @foreach ($item->associatedModel->variations as $variation)
-                                @if (!empty($variation->size))
+                                @if ( $variation->id==$item->attributes->variation_id)
                                     <div
                                         class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif ">
                                         {{-- <div class="flex-1">
@@ -214,7 +214,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                         </div> --}}
                                         <div
                                             class="flex-1 text-base @if ($locale_direction == 'rtl') text-left @else text-right @endif font-semibold">
-                                            {{ @num_format($variation->default_sell_price - $item->attributes->size->pivot->discount) }}
+                                            {{ @num_format($variation->default_sell_price - $item->associatedModel->discount) }}
                                             <span
                                                 class="font-bold">
                                             {{ session('currency')['code'] }}</span>
@@ -222,6 +222,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                     </div>
                                 @endif
                             @endforeach
+                
                         </div>
                     @endif
                 @endforeach

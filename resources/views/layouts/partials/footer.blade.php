@@ -6,14 +6,14 @@
                     <img src="{{ asset('uploads/' . session('logo')) }}" alt="logo" class="mt-8 w-24 h-24 center-img box-shadow-btn" >
                     <div class="font-semibold text-dark mt-8">{{ App\Models\System::getProperty('site_title') }}</div>
                     
-             {{--   <div style="float: right;">
+               <div >
                     <div class="pr-4 pt-2   text-lg text-dark">@lang('lang.about_us')</div>
                     <div class="pr-4 pt-2  sm:text-base xs:text-xs text-dark">
-                        <a href="{{ action('AboutUsController@index') }}">
+                        <a href="{{ action('AboutUsController@index') }}" class="text-primary" style="color:rgb(97, 97, 219) !important;">
                             {{ App\Models\System::getProperty('about_us_footer') }}
                         </a>
                     </div>
-                </div> --}}
+                </div>
  
                    
             <div>
