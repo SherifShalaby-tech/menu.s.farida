@@ -12,6 +12,13 @@
                         <a href="{{ action('AboutUsController@index') }}" class="text-primary" style="color:rgb(97, 97, 219) !important;">
                             {{ App\Models\System::getProperty('about_us_footer') }}
                         </a>
+                        <br><br>
+                        <p class="text-dark text-center">
+                            <a href="{{ action('AboutUsController@index') }}"
+                                class="bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg">@lang('lang.show_more')
+                            </a>
+                        </p>
+                        <br><br>
                     </div>
                 </div>
  
