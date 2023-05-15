@@ -1,9 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\System;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SystemSeeder extends Seeder
 {
@@ -14,16 +14,15 @@ class SystemSeeder extends Seeder
      */
     public function run()
     {
-        $pos = System::getProperty('pos');
-        if(!isset($pos)){
-            System::updateOrCreate(
-                ['key' => 'language'],
-                ['value' => 35]
-            );
-            System::updateOrCreate(
-                ['key' => 'currency'],
-                ['value' => 'ar']
-            );
-        } 
+        if(env('ENABLE_POS_SYNC')){
+            DB::table('systems')->insert([
+                'key' => 'language',
+                'value' => 'ar', 'date_and_time' => Carbon::now(), 'created_by' => 1
+            ]);
+            DB::table('systems')->insert([
+                'key' => 'currency',
+                'value' => 35, 'date_and_time' => Carbon::now(), 'created_by' => 1
+            ]);
+        }
     }
 }
