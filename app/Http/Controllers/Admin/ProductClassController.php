@@ -295,7 +295,9 @@ class ProductClassController extends Controller
                 }
             } 
 
-
+            if(!isset($request->cropImages[0]) || strlen($request->cropImages[0])==0){
+                $class->clearMediaCollection('product_class');
+            }
 
 
             $this->commonUtil->addSyncDataWithPos('ProductClass', $class, $data, 'PUT', 'product-class');
