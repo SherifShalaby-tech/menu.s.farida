@@ -221,8 +221,16 @@ class ProductController extends Controller
     {
             $data = $request->except('_token', 'image');
             $data['sku'] = $this->productUtil->generateProductSku($data['name']);
+            if(empty($request->variations)){
             $data['purchase_price'] = $data['purchase_price'];
             $data['sell_price'] = $data['sell_price'];
+            }else{
+                // foreach ($request->variations as $v) {
+                    $data['purchase_price'] = 0;
+                    $data['sell_price'] = 0;
+                //     break;
+                // }
+            }
             $data['discount_type'] = !empty($request->discount_type)? $request->discount_type:null;
             $data['discount'] = !empty($request->discount)?$request->discount : null;
             $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
@@ -314,11 +322,33 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        
+        // try {
             $data = $request->except('_token', '_method', 'image');
             $data['purchase_price'] = $data['purchase_price'];
-            $data['sell_price'] = $data['sell_price'];
-            $data['discount'] = $data['discount'];
+            if(!empty($request->variations) && count($request->variations)==1){
+                if(!empty($request->variations)){
+                    foreach ($request->variations as $v) {
+                        if($v['name']=='Default'){
+                            $data['purchase_price'] = $data['purchase_price'];
+                            $data['sell_price'] = $data['sell_price'];
+                        }else{
+                            $data['purchase_price'] = 0;
+                            $data['sell_price'] = 0;
+                        }
+                    break;
+                    }
+                }
+                
+            }
+            elseif(empty($request->variations)){
+                $data['purchase_price'] = $data['purchase_price'];
+                $data['sell_price'] = $data['sell_price'];
+            }
+            else{
+                $data['purchase_price'] = 0;
+                $data['sell_price'] = 0;
+            }
             $data['discount_type'] = $data['discount_type'];
             $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
             $data['discount_end_date'] = !empty($data['discount_end_date']) ? $this->commonUtil->uf_date($data['discount_end_date']) : null;
@@ -365,13 +395,13 @@ class ProductController extends Controller
                 'success' => true,
                 'msg' => __('lang.success')
             ];
-        } catch (\Exception $e) {
-            Log::emergency('File: ' . $e->getFile() . 'Line: ' . $e->getLine() . 'Message: ' . $e->getMessage());
-            $output = [
-                'success' => false,
-                'msg' => __('lang.something_went_wrong')
-            ];
-        }
+        // } catch (\Exception $e) {
+        //     Log::emergency('File: ' . $e->getFile() . 'Line: ' . $e->getLine() . 'Message: ' . $e->getMessage());
+        //     $output = [
+        //         'success' => false,
+        //         'msg' => __('lang.something_went_wrong')
+        //     ];
+        // }
 
         return redirect()->back()->with('status', $output);
     }
