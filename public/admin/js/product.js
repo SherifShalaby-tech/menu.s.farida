@@ -114,10 +114,10 @@ $(document).on("click", ".remove_row", function () {
     row_id = $(this).closest("tr").data("row_id");
     $(this).closest("tr").remove();
 });
-$(document).on("change", "#purchase_price", function () {
-    let purchase_price = __read_number($(this));
-    __write_number($(".default_purchase_price"), purchase_price);
-});
+// $(document).on("change", "#purchase_price", function () {
+//     let purchase_price = __read_number($(this));
+//     __write_number($(".default_purchase_price"), purchase_price);
+// });
 $(document).on("change", "#sell_price", function () {
     let sell_price = __read_number($(this));
     __write_number($(".default_sell_price"), sell_price);
