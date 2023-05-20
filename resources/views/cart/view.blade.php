@@ -146,6 +146,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                         @endforeach
                     </select>
                 </div>
+                @if(env('ENABLE_POS_SYNC'))
                 <div class="flex flex-row justify-center mt-4">
                     <select id="store_id" name="store_id" required
                         class="w-1/2 mx-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -162,6 +163,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                     </select>
 
                 </div>
+                @endif
 
             </div>
             <div class="flex-1 xl:px-16 lg:px-2 md:px-4 xs:px-4 xs:mt-8 xs:border-t-2">
