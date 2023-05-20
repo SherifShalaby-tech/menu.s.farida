@@ -27,7 +27,7 @@
         default_purchase_price',
     'required',
 ]) !!}</td>
-    <td>{!! Form::text('variations[' . $row_id . '][default_sell_price]', $product_sale_price, ['class' => 'form-control default_sell_price', 'required']) !!}</td>
+    <td>{!! Form::text('variations[' . $row_id . '][default_sell_price]', $product_sale_price, ['class' => 'form-control default_sell_price']) !!}</td>
     <td> <button type="button" class="btn btn-danger btn-xs remove_row mt-2"><i class="fa fa-times"></i></button>
     </td>
 </tr>
