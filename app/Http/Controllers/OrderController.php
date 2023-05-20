@@ -56,7 +56,7 @@ class OrderController extends Controller
         try {
 
             $data['sales_note'] = $request->sales_note;
-            $data['store_id'] = $request->store_id;
+            $data['store_id'] =env('ENABLE_POS_SYNC')?$request->store_id:10;
             $data['customer_name'] = $request->customer_name;
             $data['phone_number'] = $request->phone_number;
             $data['address'] = !empty($request->address) ? $request->address : null;
@@ -125,7 +125,9 @@ class OrderController extends Controller
 
 
             $site_title = System::getProperty('site_title');
-            $text .= "%0D%0A ------------------+" . urlencode($site_title) . "+------------------ %0D%0A+" . __('lang.order_no') . "+%3A+" . $order->id . " " . __('lang.total') . "+%3A+" . $order->final_total . " " . session('currency')['code'] . " +%0D%0A+" . __('lang.quantity') . "+%3A+" . $order->order_details->count() . "%0D%0A+------------------ %0D%0A+";
+            $text .= urlencode($product->name) .'+  +'.$content->attributes->size.'+%3A+' . $order_details['quantity'] . "+%2A+" . $order_details['price'] . '+=+' . $order_details['sub_total'] . " " . session('currency')['code'] . " +%0D%0A+";
+
+            // $text .= "%0D%0A ------------------+" . urlencode($site_title) . "+------------------ %0D%0A+" . __('lang.order_no') . "+%3A+" . $order->id . " " . __('lang.total') . "+%3A+" . $order->final_total . " " . session('currency')['code'] . " +%0D%0A+" . __('lang.quantity') . "+%3A+" . $order->order_details->count() . "%0D%0A+------------------ %0D%0A+";
             if ($order->order_type == 'order_now') {
                 $text .= __('lang.date_and_time_url') . "+%3A+" . urlencode(date('m/d/Y H:i A'));
             }
