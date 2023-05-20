@@ -18,7 +18,7 @@
     @endphp
     <td>{!! Form::hidden('name_hidden', $product_name, ['class' => 'form-control name_hidden']) !!}
         {!! Form::hidden('variations[' . $row_id . '][sub_sku]', !empty($item) ? $item->sub_sku : null, ['class' => 'form-control v_sub_sku']) !!}
-        {!! Form::text('variations[' . $row_id . '][name]', $product_name, ['class' => 'form-control v_name']) !!}</td>
+        {!! Form::text('variations[' . $row_id . '][name]', $product_name, ['class' => 'form-control v_name','required']) !!}</td>
 
     <td>{!! Form::select('variations[' . $row_id . '][size_id]', $sizes, !empty($item) ? $item->size_id : false, ['class' => 'form-control select2 v_size', 'data-live-search' => 'true', 'placeholder' => '']) !!}
     </td>
