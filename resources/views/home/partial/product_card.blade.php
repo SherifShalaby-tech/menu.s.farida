@@ -5,7 +5,7 @@
         @break
     @endforeach
     <div class="w-full  shadow-lg pb-full rounded-xl bg-center bg-no-repeat bg-cover relative   box-shadow-cat product_card"
-        style="background-image: url('{{ !empty($product->getFirstMediaUrl('product'))? $product->getFirstMediaUrl('product'): asset('uploads/' . session('logo')) }}')">
+        style="background-image: url('{{ images_asset($product->getFirstMediaUrl('product')) }}')">
 
        {{-- <div class="flex  w-full text-center">
             <div class="absolute bottom-0 mx-auto w-full">

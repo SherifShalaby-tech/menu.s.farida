@@ -3,7 +3,7 @@
         <div class="flex flex-row">
             <div class="w-full text-center">
                 <div class="flex-col mt-6">
-                    <img src="{{ asset('uploads/' . session('logo')) }}" alt="logo" class="mt-8 w-24 h-24 center-img box-shadow-btn" >
+                    <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" class="mt-8 w-24 h-24 center-img box-shadow-btn" >
                     <div class="font-semibold text-dark mt-8">{{ App\Models\System::getProperty('site_title') }}</div>
                     
                <div >
