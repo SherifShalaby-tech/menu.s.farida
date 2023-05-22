@@ -55,7 +55,7 @@ class UserController extends Controller
             return DataTables::of($users)
                 ->editColumn('date_of_join', '@if(!empty($date_of_join)){{@format_date($date_of_join)}}@endif')
                 ->addColumn('image', function ($row) {
-                    $image = $row->getFirstMediaUrl('profile');
+                    $image = images_asset($row->getFirstMediaUrl('profile'));
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {

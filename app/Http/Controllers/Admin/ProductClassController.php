@@ -61,7 +61,7 @@ class ProductClassController extends Controller
 
             return DataTables::of($product_classes)
                 ->addColumn('image', function ($row) {
-                    $image = $row->getFirstMediaUrl('product_class');
+                    $image = images_asset($row->getFirstMediaUrl('product_class'));
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
