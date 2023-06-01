@@ -54,7 +54,9 @@ class ProductController extends Controller
 
             $products = Product::leftjoin('product_classes', 'products.product_class_id', 'product_classes.id')
             ->orderBy('products.sort')->orderBy('products.created_at','desc');
-
+            if(env('ENABLE_POS_SYNC')){
+                $products->where('is_raw_material', 0);
+            }
             if (!empty(request()->product_class_id)) {
                 $products->where('products.product_class_id', request()->product_class_id);
             }
@@ -67,11 +69,11 @@ class ProductController extends Controller
 
             return DataTables::of($products)
                 ->addColumn('image', function ($row) {
-                    $image = $row->getFirstMediaUrl('product');
+                    $image = images_asset($row->getFirstMediaUrl('product'));
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
-                        return '<img src="' . asset('/uploads/' . session('logo')) . '" height="50px" width="50px">';
+                        return '<img src="' . images_asset(asset('/uploads/' . session('logo'))) . '" height="50px" width="50px">';
                     }
                 })
                 ->editColumn('discount_start_date', '@if(!empty($discount_start_date)){{@format_date($discount_start_date)}}@endif')
@@ -102,7 +104,8 @@ class ProductController extends Controller
                     $product_sizes = Variation::where('product_id',$row->id)->get();
                     if(!empty($product_sizes)){
                     foreach($product_sizes as $size){
-                        $sell.=$size->default_sell_price.'<br>';
+                        $p=number_format($size->default_sell_price,  2, '.', ',');
+                        $sell.=$p.'<br>';
                     }
                 }
                     return $sell;
@@ -112,7 +115,8 @@ class ProductController extends Controller
                     $product_sizes = Variation::where('product_id',$row->id)->get();
                     if(!empty($product_sizes)){
                     foreach($product_sizes as $size){
-                        $purchase.=$size->default_purchase_price.'<br>';
+                        $p=number_format($size->default_purchase_price,  2, '.', ',');
+                        $purchase.=$p.'<br>';
                     }
                 }
                     return $purchase;
@@ -382,7 +386,9 @@ class ProductController extends Controller
                     }
                 }
             }
-
+            if(!$request->has('image') || strlen($request->input('image'))==0){
+                $product->clearMediaCollection('product');
+            }
 
 
             $data['variations'] = $product->variations->toArray();
