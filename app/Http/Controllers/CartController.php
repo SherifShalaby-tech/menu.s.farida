@@ -266,6 +266,9 @@ class CartController extends Controller
     public function updateProductQuantity($product_id, $quantity)
     {
         try {
+            if(strpos($quantity,',')!==false){
+                $quantity=str_replace(',','.',$quantity);
+            }
             $user_id = Session::get('user_id');
 
 

@@ -1,3 +1,11 @@
+@php
+$variation_products='';
+if($product->variations->where('name','!=','Default')->count()>0){
+    $variation_products=$product->variations->where('name','!=','Default');
+}else{
+    $variation_products=$product->variations->where('name','Default');
+}
+@endphp
 <div class="w-full mb-4 productCard" >
     @foreach($product->variations as $size)
         <input type="hidden" value="{{$size->size_id}}" name="size"/>
@@ -21,7 +29,7 @@
             <a href="{{ action('ProductController@show', $product->id) }}">
             <p class="md:text-sm xs:text-tiny font-semibold text-white py-0">{{ Str::limit($product->name, 15) }}</p>
             </a>
-            <p class="md:text-sm xs:text-tiny font-semibold text-white py-0 flex-product-sb px-3">
+            <p class="md:text-sm xs:text-tiny font-semibold text-white py-0 sm:flex sm:justify-between px-3" style="align-content: center; align-items: center;">
                 
                 <button data-product_id="{{ $product->id }}" type="button"
                     class="bg-white  md:w-12 md:h-12 xs:w-8 xs:h-8 rounded-full cart_button">
