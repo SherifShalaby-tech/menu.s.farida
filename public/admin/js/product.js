@@ -26,7 +26,24 @@ $(document).on("click", "#submit_btn", function (e) {
         $("form#product_form").submit();
     }
 });
-
+$(document).on("change", "#purchase_price", function () {
+    // var row=$(this).parent('td').parent('tr').data('row_id');
+    if($('table .variation_row').length==1){
+        if($('.variation_name').val()=="Default"){
+            let purchase_price = __read_number($(this));
+            __write_number($(".default_purchase_price"), purchase_price);
+        }
+    } 
+});
+$(document).on("change", "#sell_price", function () {
+    // var row=$(this).parent('td').parent('tr').data('row_id');
+    if($('table .variation_row').length==1){
+        if($('.variation_name').val()=="Default"){
+        let sell_price = __read_number($(this));
+        __write_number($(".default_sell_price"), sell_price);
+        }
+    }
+});
 $(document).on("submit", "form#quick_add_product_class_form", function (e) {
     e.preventDefault();
     var data = $(this).serialize();

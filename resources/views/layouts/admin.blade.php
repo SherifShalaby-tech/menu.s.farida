@@ -145,7 +145,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://fastly.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 
 @section('js')
@@ -182,6 +182,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="{{ asset('admin/js/cropper.js') }}"></script>
     <script>
+         $(document).on('select2:open', () => {
+            document.querySelector('.select2-search__field').focus();
+        });
         $(document).on('click', '.delete_item', function(e) {
             e.preventDefault();
             swal({
