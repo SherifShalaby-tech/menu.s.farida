@@ -852,8 +852,46 @@ input:checked + .toggle-bg {
   --tw-backdrop-sepia:  ;
 }
 .container {
-  width: 100%;
+  width: 90%;
 }
+@media (max-width: 520px) {
+    .navigation{
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .languages{
+        margin-bottom: 15px;
+    }
+    .categories{
+        margin-bottom: 20px;
+    }
+    .about{
+        align-self: stretch;
+        flex-shrink: 0;
+        text-align: left!important;
+
+    }
+    .count{
+        width: 3rem!important;
+    }
+    .times-left{
+        margin-left: 5px;
+    }
+    .times-right{
+        margin-right: 5px;
+    }
+}
+@media (min-width: 521px){
+    .navigation{
+        flex-wrap: nowrap;
+        justify-content: space-around;
+    }
+    .about{
+        margin-top: 7px;
+    }
+}
+
+
 @media (min-width: 360px) {
 
   .container {
