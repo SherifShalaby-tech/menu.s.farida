@@ -14,13 +14,13 @@ if (!empty($user_id)) {
     <div class="flex-1 text-center mt-6">
 
     </div>
-    <div class="flex-1 text-right">
+    <div class="flex-1 text-right ">
         <a href="#top" class="bg-red text-white font-semibold py-2 px-3 rounded-full mt-10" id="goToTop"  ><i
                 class="fa fa-arrow-up"></i></a>
     </div>
 </div>
 
-<div class="text-center mt-6" style="    display: flex;
+<div class="text-center mt-6 " style="    display: flex;
 position: fixed;
 width: 120px;
 height: 120px;
@@ -39,7 +39,7 @@ transition: all .4s;
 -webkit-transition: all .4s;
 -o-transition: all .4s;
 -moz-transition: all .4s;">
-<a href="{{ action('CartController@view') }}" class=" text-center">
+<a href="{{ action('CartController@view') }}" class=" text-center cart_items">
     <button class="text-white font-semibold relative  rounded-full text-2xl"
         style="height: 70px; width: 70px;">
         <span class="item_count text-cart text-dark absolute left-8 top-5" style="padding-left: 25px;"

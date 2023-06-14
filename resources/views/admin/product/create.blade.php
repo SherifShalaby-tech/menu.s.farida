@@ -10,8 +10,8 @@
 
 <style>
     .modal-content{
-        overflow: scroll;
-        height: 90vh;
+        /* overflow: scroll;
+        height: 90vh; */
     }
 </style>
 
@@ -239,14 +239,16 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    <x-adminlte-input name="name" label="{{ __('lang.name') }}" placeholder="{{ __('lang.name') }}"
-                        enable-old-support>
-                        <x-slot name="appendSlot">
-                            <div class="input-group-text text-primary translation_btn"  data-type="product">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                        </x-slot>
-                    </x-adminlte-input>
+                    <div class="form-group">
+                        <x-adminlte-input name="name" required label="{{ __('lang.name') }}" placeholder="{{ __('lang.name') }}"
+                            enable-old-support style="width: 80%">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text text-primary translation_btn"  data-type="product">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                    </div>
                 </div>
                 @include('admin.partial.translation_inputs', [
                     'attribute' => 'name',
@@ -295,22 +297,21 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::label('purchase_price', __('lang.cost') . ' *', []) !!}
-                    {!! Form::text('purchase_price', null, ['class' => 'form-control', 'placeholder' => session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket' ? __('lang.purchase_price') : __('lang.cost'), 'required']) !!}
+                    {!! Form::label('purchase_price', __('lang.cost'), []) !!}
+                    {!! Form::text('purchase_price', null, ['class' => 'form-control', 'placeholder' => session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket' ? __('lang.purchase_price') : __('lang.cost')]) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    {!! Form::label('sell_price', __('lang.sell_price') . ' *', []) !!}
+                    {!! Form::label('sell_price', __('lang.sell_price'), []) !!}
                     {!! Form::text('sell_price', null, ['class' => 'form-control', 'placeholder' => __('lang.sell_price'), 'required']) !!}
                 </div>
             </div>
-
             <div class="clearfix"></div>
-            <div class="col-md-4">
+           <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('discount_type', __('lang.discount_type'), []) !!}
-                    {!! Form::select('discount_type', ['fixed' => __('lang.fixed'), 'percentage' => __('lang.percentage')], 'fixed', ['class' => 'form-control', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                    {!! Form::select('discount_type', ['fixed' => __('lang.fixed'), 'percentage' => __('lang.percentage')], null, ['class' => 'form-control', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
                 </div>
             </div>
             <div class="col-md-4">
@@ -328,19 +329,22 @@
             <div class="col-md-4">
                 <div class="form-group">
                     {!! Form::label('discount_end_date', __('lang.discount_end_date'), []) !!}
-                    {!! Form::text('discount_end_date', null, ['class' => 'form-control datepicker', 'placeholder' => __('lang.discount_end_date')]) !!}
+                    {!! Form::text('discount_end_date', null, ['class' => 'form-control datepicker', 'placeholder' => __('lang.discount_end_date'), 'style' => 'width: 80%']) !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="form-group">
+                {!! Form::label('sort', __('lang.sort') . ':*') !!}
+                {!! Form::number('sort', 500, ['class' => 'form-control', 'placeholder' => __('lang.sort'), 'required']) !!}
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     {!! Form::label('active', __('lang.status'), []) !!} <br>
                     {!! Form::checkbox('active', 1, true, ['class']) !!}
                 </div>
             </div>
-
             <div class="col-md-12" style="margin-top: 10px">
                 <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="this_product_have_variant">
+                    <input class="custom-control-input" type="checkbox" name="this_product_have_variant" id="this_product_have_variant">
                     <label for="this_product_have_variant"
                         class="custom-control-label">@lang('lang.this_product_have_variant')</label>
                 </div>
@@ -410,12 +414,12 @@
 
 
 <script>
-  const fileInput = document.querySelector('#file-input');
-    const previewContainer = document.querySelector('.preview-container');
-    const croppieModal = document.querySelector('#croppie-modal');
-    const croppieContainer = document.querySelector('#croppie-container');
-    const croppieCancelBtn = document.querySelector('#croppie-cancel-btn');
-    const croppieSubmitBtn = document.querySelector('#croppie-submit-btn');
+  var fileInput = document.querySelector('#file-input');
+    var previewContainer = document.querySelector('.preview-container');
+    var croppieModal = document.querySelector('#croppie-modal');
+    var croppieContainer = document.querySelector('#croppie-container');
+    var croppieCancelBtn = document.querySelector('#croppie-cancel-btn');
+    var croppieSubmitBtn = document.querySelector('#croppie-submit-btn');
 
 
     fileInput.addEventListener('change', () => {

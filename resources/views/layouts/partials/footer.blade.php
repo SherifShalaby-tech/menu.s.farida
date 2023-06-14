@@ -3,17 +3,24 @@
         <div class="flex flex-row">
             <div class="w-full text-center">
                 <div class="flex-col mt-6">
-                    <img src="{{ asset('uploads/' . session('logo')) }}" alt="logo" class="mt-8 w-24 h-24 center-img box-shadow-btn" >
+                    <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" class="mt-8 w-24 h-24 center-img box-shadow-btn" >
                     <div class="font-semibold text-dark mt-8">{{ App\Models\System::getProperty('site_title') }}</div>
                     
-             {{--   <div style="float: right;">
+               <div >
                     <div class="pr-4 pt-2   text-lg text-dark">@lang('lang.about_us')</div>
                     <div class="pr-4 pt-2  sm:text-base xs:text-xs text-dark">
-                        <a href="{{ action('AboutUsController@index') }}">
+                        <a href="{{ action('AboutUsController@index') }}" class="text-primary" style="color:rgb(97, 97, 219) !important;">
                             {{ App\Models\System::getProperty('about_us_footer') }}
                         </a>
+                        <br><br>
+                        <p class="text-dark text-center">
+                            <a href="{{ action('AboutUsController@index') }}"
+                                class="bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg">@lang('lang.show_more')
+                            </a>
+                        </p>
+                        <br><br>
                     </div>
-                </div> --}}
+                </div>
  
                    
             <div>
@@ -86,8 +93,9 @@
     <div class="flex  " style="float: left;    padding-bottom: 80px;">
         <div class="flex-1 mt-10" style="font-size: small;">
             <p class="text-dark text-center ">@lang('lang.footer_copyright')</p>
-            <p class="text-dark text-center  ">Tel : 00201003836917 - 00905386531059 - 0097433231457</p>
+            <p class="text-dark text-center  ">Tel :  00905386531059 - 0097433231457</p>
 
         </div>
     </div>
 </div>
+{{-- background-attachment: fixed; --}}
