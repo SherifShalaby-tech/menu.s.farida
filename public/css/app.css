@@ -854,31 +854,85 @@ input:checked + .toggle-bg {
 .container {
   width: 90%;
 }
+.subMenu{
+    align-items: center !important;
+}
 @media (max-width: 520px) {
-    .navigation{
+    .navigation {
         flex-wrap: wrap;
         justify-content: space-between;
     }
-    .languages{
+
+    .languages {
         margin-bottom: 15px;
     }
-    .categories{
+
+    .categories {
         margin-bottom: 20px;
     }
-    .about{
+
+    .about {
         align-self: stretch;
         flex-shrink: 0;
-        text-align: left!important;
+        text-align: left !important;
 
     }
-    .count{
-        width: 3rem!important;
+
+    .count {
+        width: 3rem !important;
     }
-    .times-left{
+
+    .times-left {
         margin-left: 5px;
     }
-    .times-right{
+
+    .times-right {
         margin-right: 5px;
+    }
+
+    .xs\:gap-2 {
+        gap: 0.5rem;
+    }
+
+    .xs\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .xs\:mt-6 {
+        margin-top: 1.5rem;
+    }
+
+    .xs\:-bottom-10 {
+        bottom: -2.5rem;
+    }
+
+    #xsMarginB {
+        margin-bottom: 42px !important;
+    }
+
+    .py-1 {
+        padding-top: 0;
+        padding-bottom: 0.25rem;
+    }
+
+    .xs\:text-tiny {
+        font-size: 0.95rem !important;
+
+    }
+
+    .xs\:h-6 {
+        height: 1.5rem;
+    }
+    .xs\:flex-col {
+        flex-direction: column;
+    }
+    .xs\:px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    #button_xs {
+        align-items: stretch;
+        flex-direction: column
     }
 }
 @media (min-width: 521px){
@@ -889,6 +943,7 @@ input:checked + .toggle-bg {
     .about{
         margin-top: 7px;
     }
+
 }
 
 
