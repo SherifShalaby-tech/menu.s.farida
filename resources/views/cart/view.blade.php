@@ -4,7 +4,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
 @endphp
 @section('content')
     @include('layouts.partials.cart-header')
- 
+
 
     <div class="container mx-auto py-4">
         {!! Form::open(['url' => action('OrderController@store'), 'method' => 'pos', 'id' => 'cart_form']) !!}
@@ -181,14 +181,16 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                     <div class="flex flex-row qty_row justify-center w-full">
                                         <button type="button"
                                             class="minus border-2 rounded-full text-lg text-center border-dark text-dark h-8 w-8">-</button>
+
                                         <input type="text" data-id="{{ $item->id }}" value="{{ $item->attributes->quantity }}"
-                                            class="quantity text-center text-dark w-24 line leading-none border-transparent bg-transparent focus:border-transparent focus:ring-0 ">
+                                            class="quantity text-center text-dark w-24 line leading-none border-transparent bg-transparent focus:border-transparent focus:ring-0 count">
+
                                         <button type="button"
                                             class="plus border-2 rounded-full text-lg text-center border-dark text-dark h-8 w-8">+</button>
                                     </div>
                                 </div>
                                 <div
-                                    class="md:w-1/6 xs:w-1/12  @if ($locale_direction == 'rtl') text-left @else text-right @endif ">
+                                    class="md:w-1/6 xs:w-1/12   @if ($locale_direction == 'rtl') text-left times-right @else text-right times-left @endif ">
                                     <a href="{{ action('CartController@removeProduct', $item->id) }}"
                                         class="mt-2 rounded-full text-lg text-center border-lightgrey text-rose-700 h-8 w-8">
                                         <i class="fa fa-times"></i>
@@ -196,7 +198,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                 </div>
                             </div>
                             <p class="text-xs text-dark font-semibold">{!! $item->associatedModel->product_details !!}</p>
-                            
+
                             <h3
                                 class="font-semibold text-base text-dark py-2 @if ($item->associatedModel->variations->first()->name == 'Default') hidden @endif"></h3>
                             @foreach ($item->associatedModel->variations as $variation)
@@ -231,7 +233,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                     </div>
                                 @endif
                             @endforeach
-                
+
                         </div>
                     @endif
                 @endforeach
@@ -264,7 +266,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
             </div>
         </div>
 
-        <div class="flex justify-center">
+        <div class="flex justify-center" id="button_xs">
             <button type="button" class="lg:w-1/4 md:w-1/2 xs:w-full h-10 mt-4 rounded-lg  bg-red text-white relative"
                 id="send_the_order">@lang('lang.send_the_order')
                 <span class="text-white text-base absolute right-2 order-total-price">{{ @num_format($total) }}
@@ -337,17 +339,17 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
         $(document).on('change', '#order', function() {
             if ($(this).prop('checked') == true) {
                 $('.order_now').removeClass('text-dark');
-         
+
 
                 $('.order_later').addClass('text-dark');
-             
+
                 $('.order_later_div').removeClass('hidden');
             } else {
                 $('.order_now').addClass('text-dark');
-           
+
 
                 $('.order_later').removeClass('text-dark');
-            
+
                 $('.order_later_div').addClass('hidden');
             }
         })
@@ -365,32 +367,32 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
         $(document).on('change', '#delivery', function() {
             if ($(this).prop('checked') == true) {
                 $('.i_will_pick').removeClass('text-dark');
-              
+
 
                 $('.home_delivery').addClass('text-dark');
-           
+
             } else {
                 $('.i_will_pick').addClass('text-dark');
-             
+
 
                 $('.home_delivery').removeClass('text-dark');
-            
+
             }
         })
 
         $(document).on('change', '#payment_type', function() {
             if ($(this).prop('checked') == true) {
                 $('.pay_online').removeClass('text-dark');
-             
+
 
                 $('.cash_on_delivery').addClass('text-dark');
-               
+
             } else {
                 $('.pay_online').addClass('text-dark');
-              
+
 
                 $('.cash_on_delivery').removeClass('text-dark');
-              
+
             }
         })
     </script>
