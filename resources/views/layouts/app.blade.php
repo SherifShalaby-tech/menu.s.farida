@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
 
 
     <meta name="description" content="{{ App\Models\System::getProperty('about_us_footer') }}">
@@ -16,6 +17,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+=======
+    
+   
+<meta name="description" content="This is an menu of restaurants linked to the cashier program as the requests reaches you on the program directly, Category: Foods">
+<meta name="google-site-verification" content="qxW5PqYjtpOQSI6WJoytZMUkKkuD7iU0bo5v8wR_uHg" />
+
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="translate">
+<meta name="google" content="sitelinkssearchbox">    
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+>>>>>>> 075f0b1 (Initial commit)
     <title>{{ App\Models\System::getProperty('site_title') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,8 +83,13 @@
         });
     </script>
     <script src="{{ asset('js/app.js') }}" defer></script>
+<<<<<<< HEAD
     <script src="{{ asset('js/flowbite.js')}}"></script>
     <script src="{{ asset('js/datepicker.js')}}"></script>
+=======
+    <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
+    <script src="https://unpkg.com/flowbite@1.3.4/dist/datepicker.js"></script>
+>>>>>>> 075f0b1 (Initial commit)
     @yield('javascript')
 </body>
 

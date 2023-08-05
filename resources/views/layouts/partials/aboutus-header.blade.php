@@ -18,18 +18,30 @@
 
 
 <div class="container-fluid mx-auto">
+<<<<<<< HEAD
     <div class="flex flex-row subMenu">
+=======
+    <div class="flex flex-row">
+>>>>>>> 075f0b1 (Initial commit)
 
         <div class="flex-3 text-white text-4xl font-bold text-left w-48">
             @include('layouts.partials.language_dropdown')
         </div>
         <div class="flex-1 ">
+<<<<<<< HEAD
 
+=======
+         
+>>>>>>> 075f0b1 (Initial commit)
         </div>
 
         <div class="flex-3 text-white  font-bold text-right w-48">
                 <div class="dropdown">
+<<<<<<< HEAD
                     <a href="{{ action('HomeController@index') }}"
+=======
+                    <a href="{{ action('HomeController@index') }}" 
+>>>>>>> 075f0b1 (Initial commit)
                     class="dropbtn bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg">
                         @lang('lang.home') <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-content">

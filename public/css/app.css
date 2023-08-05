@@ -852,6 +852,7 @@ input:checked + .toggle-bg {
   --tw-backdrop-sepia:  ;
 }
 .container {
+<<<<<<< HEAD
   width: 90%;
 }
 .subMenu{
@@ -947,6 +948,10 @@ input:checked + .toggle-bg {
 }
 
 
+=======
+  width: 100%;
+}
+>>>>>>> 075f0b1 (Initial commit)
 @media (min-width: 360px) {
 
   .container {

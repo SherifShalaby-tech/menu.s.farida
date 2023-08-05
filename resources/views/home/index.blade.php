@@ -1,15 +1,24 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 @section('content')
-    <div class="container-fluid mx-auto">
+    <div class="mx-auto container-fluid">
         <div class="flex flex-row navigation">
-            <div class="text-white text-4xl font-bold text-left w-48 languages">
+            <div class="w-48 text-4xl font-bold text-left text-white languages">
                 @include('layouts.partials.language_dropdown')
             </div>
             <div class="categories">
-                <div class=" width-fit h-10 bg-red text-white mx-auto text-center md:text-base xs:text-sm   rounded-xl ">
+                <div class="h-10 mx-auto text-center text-white width-fit bg-red md:text-base xs:text-sm rounded-xl">
                     <div class="dropdown">
-                        <button class="dropbtn text-2xl text-white font-semibold py-1 ">@lang('lang.categories') <i class="fas fa-caret-down"></i></button>
+                        <button class="py-1 text-2xl font-semibold text-white dropbtn ">@lang('lang.categories') <i class="fas fa-caret-down"></i></button>
+    <div class="mx-auto container-fluid">
+        <div class="flex flex-row">
+            <div class="w-48 text-4xl font-bold text-left text-white flex-3">
+                @include('layouts.partials.language_dropdown')
+            </div>
+            <div class="flex-1 ">
+                <div class="h-10 mx-auto text-center text-white width-fit bg-red md:text-base xs:text-sm rounded-xl">
+                    <div class="dropdown">
+                        <button class="py-1 text-2xl font-semibold text-white dropbtn ">@lang('lang.categories') <i class="fas fa-caret-down"></i></button>
                         <div class="dropdown-content">
                             @foreach ($categories as $category)
                                 <a href="{{ action('ProductController@getProductListByCategory', $category->id) }}"> {{ $category->name }}</a>
@@ -19,10 +28,14 @@
 
                 </div>
             </div>
-            <div class="text-white  font-bold text-right w-48 about">
+            <div class="w-48 font-bold text-right text-white about">
                 <div class="dropdown">
-                    <a class="dropbtn bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg"
+                    <a class="px-4 py-2 font-bold text-white border-2 border-white rounded-lg dropbtn bg-red md:text-base xs:text-sm"
                     href="{{ action('AboutUsController@index') }}"> @lang('lang.about_us') <i class="fas fa-caret-down"></i></a>
+            <div class="w-48 mt-2 font-bold text-right text-white flex-3" >
+                <div class="dropdown" >
+                    <a class="px-4 py-2 font-bold text-white border-2 border-white rounded-lg dropbtn bg-red md:text-base xs:text-sm"
+                    href="{{ action('AboutUsController@index') }}" > @lang('lang.about_us') <i class="fas fa-caret-down"></i></a>
 
                     <div class="dropdown-content">
                         <a href="{{ action('HomeController@index') }}" >
@@ -36,7 +49,17 @@
     <div class="container mx-auto mt-14">
         @if (!empty($homepage_category_carousel))
             <div class="flex flex-row items-center">
-                <div class="flex-3 w-48 md:block xs:hidden ">
+                <div class="w-48 flex-3 md:block xs:hidden ">
+
+    </div>
+
+
+
+
+    <div class="container mx-auto mt-14">
+        @if (!empty($homepage_category_carousel))
+            <div class="flex flex-row items-center">
+                <div class="w-48 flex-3 md:block xs:hidden ">
                     <div class="owl-nav">
                         <div class="prev-nav">
                             <img src="{{ asset('images/slider-arrow-left.png') }}" alt="" class="m-auto">
@@ -52,12 +75,18 @@
                                     <div class="flex-col mx-auto">
                                         <div class="">
                                             <img src="{{ images_asset($category->getFirstMediaUrl('product_class')) }}"
-                                                class="border-2 border-dark mx-auto w-full aspect-square rounded-lg"
+                                                class="w-full mx-auto border-2 rounded-lg border-dark aspect-square"
                                                 alt="category-1">
                                         </div>
                                         <div
-                                            class="lg:h-10 md:h-6 xs:h-6 lg:w-36 md:w-22 xs:w-22 bg-darkblue mx-auto text-center rounded-3xl mt-4">
-                                            <h3 class="lg:text-lg md:text-tiny xs:text-tiny text-white font-semibold py-1">
+                                            class="mx-auto mt-4 text-center lg:h-10 md:h-6 xs:h-6 lg:w-36 md:w-22 xs:w-22 bg-darkblue rounded-3xl">
+                                            <h3 class="py-1 font-semibold text-white lg:text-lg md:text-tiny xs:text-tiny">
+                                                class="w-full mx-auto border-2 rounded-lg border-dark aspect-square"
+                                                alt="category-1">
+                                        </div>
+                                        <div
+                                            class="mx-auto mt-4 text-center lg:h-10 md:h-6 xs:h-6 lg:w-36 md:w-22 xs:w-22 bg-darkblue rounded-3xl">
+                                            <h3 class="py-1 font-semibold text-white lg:text-lg md:text-tiny xs:text-tiny">
                                                 {{ $category->name }}</h3>
                                         </div>
                                     </div>
@@ -67,7 +96,8 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="flex-3 w-48 md:block xs:hidden ">
+                <div class="w-48 flex-3 md:block xs:hidden ">
+                <div class="w-48 flex-3 md:block xs:hidden ">
                     <div class="owl-nav">
                         <div class="next-nav">
                             <img src="{{ asset('images/slider-arrow-right.png') }}" alt="" class="m-auto">
@@ -76,8 +106,10 @@
                 </div>
             </div>
         @else
-            <div class="w-full mx-auto p-4">
-                <div class="grid xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xs:gap-2 md:gap-16  lg:gap-16 md:mt-12 xs:mt-6 ">
+            <div class="w-full p-4 mx-auto">
+                <div class="grid xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xs:gap-2 md:gap-16 lg:gap-16 md:mt-12 xs:mt-6 ">
+            <div class="w-full p-4 mx-auto">
+                <div class="grid xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xs:gap-2 md:gap-16 lg:gap-16 md:mt-12 xs:mt-6 ">
                     @foreach ($categories as $category)
                         @include('home.partial.category_card', [
                             'category' => $category,
@@ -92,14 +124,17 @@
         <div class="container mx-auto">
             <div class="flex">
                 <div class="flex-1">
-                    <div class="w-1/2 h-10 bg-red text-white mx-auto text-center mt-14 rounded-xl">
-                        <h3 class="text-2xl text-white font-semibold py-1">@lang('lang.promotions')</h3>
+                    <div class="w-1/2 h-10 mx-auto text-center text-white bg-red mt-14 rounded-xl">
+                        <h3 class="py-1 text-2xl font-semibold text-white">@lang('lang.promotions')</h3>
+                    <div class="w-1/2 h-10 mx-auto text-center text-white bg-red mt-14 rounded-xl">
+                        <h3 class="py-1 text-2xl font-semibold text-white">@lang('lang.promotions')</h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container mx-auto mt-14">
-            <div class="w-full mx-auto p-4">
+            <div class="w-full p-4 mx-auto">
+            <div class="w-full p-4 mx-auto">
                 <div class="grid xs:grid-cols-3 md:grid-cols-4 xs:gap-2 md:gap-16 md:mt-12 xs:mt-6">
                     @foreach ($offers_array as $offer)
                         @if ($loop->index == 4)
@@ -116,7 +151,8 @@
             <div class="container mx-auto">
                 <div class="flex md:justify-end xs:justify-center">
                     <a href="{{ action('ProductController@getPromotionProducts') }}"
-                        class="bg-red text-white font-semibold py-1 md:px-4 xs:px-8 rounded-md md:mr-16 md:mt-8">@lang('lang.show_more')</a>
+                        class="py-1 font-semibold text-white rounded-md bg-red md:px-4 xs:px-8 md:mr-16 md:mt-8">@lang('lang.show_more')</a>
+                        class="py-1 font-semibold text-white rounded-md bg-red md:px-4 xs:px-8 md:mr-16 md:mt-8">@lang('lang.show_more')</a>
                 </div>
             </div>
         @endif

@@ -110,7 +110,11 @@
                                                                                                                   class="fa fa-trash"></i></button>
                                 <span class="btn btn-xs btn-primary  crop-btn" id="crop-logo-btn" data-toggle="modal" data-target="#logoModal"><i style="font-size: 25px;"
                                 class="fas fa-crop"></i></span>
+<<<<<<< HEAD
 
+=======
+                                     
+>>>>>>> 075f0b1 (Initial commit)
                             </div>
                         @endif
 
@@ -169,7 +173,11 @@
                                                                                                                   class="fa fa-trash"></i></button>
                                 <span class="btn btn-xs btn-primary  crop-btn" id="crop-home-btn" data-toggle="modal" data-target="#homeModal"><i style="font-size: 25px;"
                                 class="fas fa-crop"></i></span>
+<<<<<<< HEAD
 
+=======
+                                     
+>>>>>>> 075f0b1 (Initial commit)
                             </div>
                         @endif
 
@@ -214,7 +222,11 @@
                             <div class="input-group-text bg-lightblue">
                                 <i class="fas fa-upload"></i>
                             </div>
+<<<<<<< HEAD
                         </x-slot> //Breadcrumb_background_image
+=======
+                        </x-slot>
+>>>>>>> 075f0b1 (Initial commit)
                     </x-adminlte-input-file>
                 </div>
             </div>
@@ -229,7 +241,11 @@
                                                                                                                   class="fa fa-trash"></i></button>
                                 <span class="btn btn-xs btn-primary  crop-btn" id="crop-breadcrumb-btn" data-toggle="modal" data-target="#breadcrumbModal"><i style="font-size: 25px;"
                                 class="fas fa-crop"></i></span>
+<<<<<<< HEAD
 
+=======
+                                     
+>>>>>>> 075f0b1 (Initial commit)
                             </div>
                         @endif
 
@@ -289,7 +305,11 @@
                                                                                                                   class="fa fa-trash"></i></button>
                                 <span class="btn btn-xs btn-primary  crop-btn" id="crop-page-btn" data-toggle="modal" data-target="#pageModal"><i style="font-size: 25px;"
                                 class="fas fa-crop"></i></span>
+<<<<<<< HEAD
 
+=======
+                                     
+>>>>>>> 075f0b1 (Initial commit)
                             </div>
                         @endif
 
@@ -320,7 +340,11 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 
+=======
+          
+>>>>>>> 075f0b1 (Initial commit)
         </div>
 
         <div class="row">
@@ -604,7 +628,11 @@
             // edit Case
             @if(!empty($page_background_image) &&  isset($settings['page_background_image']))
                 document.getElementById("crop-page-btn").addEventListener('click', () => {
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 075f0b1 (Initial commit)
                     console.log(("#exampleModal"))
                     setTimeout(() => {
                         launchPageCropTool(document.getElementById("img_page_footer"));
@@ -715,8 +743,13 @@
             // Set up Croppie options
             var croppieOptions = {
                 viewport: {
+<<<<<<< HEAD
                     width: 600,
                     height: 200,
+=======
+                    width: 450,
+                    height: 250,
+>>>>>>> 075f0b1 (Initial commit)
                     type: 'square' // or 'square'
                 },
                 boundary: {
@@ -764,7 +797,11 @@
                 // edit Case
                 @if(!empty($breadcrumb_background_image) &&  isset($settings['breadcrumb_background_image']))
                     document.getElementById("crop-breadcrumb-btn").addEventListener('click', () => {
+<<<<<<< HEAD
 
+=======
+                        
+>>>>>>> 075f0b1 (Initial commit)
                         console.log(("#exampleModal"))
                         setTimeout(() => {
                             launchBreadcrumbCropTool(document.getElementById("img_breadcrumb_footer"));
@@ -924,7 +961,11 @@
                 // edit Case
                 @if(!empty($home_background_image) &&  isset($settings['home_background_image']))
                     document.getElementById("crop-home-btn").addEventListener('click', () => {
+<<<<<<< HEAD
 
+=======
+                        
+>>>>>>> 075f0b1 (Initial commit)
                         console.log(("#exampleModal"))
                         setTimeout(() => {
                             launchHomeCropTool(document.getElementById("img_home_footer"));
@@ -1084,7 +1125,11 @@
                 // edit Case
                 @if (!empty($logo) && isset($settings['logo']))
                     document.getElementById("crop-logo-btn").addEventListener('click', () => {
+<<<<<<< HEAD
 
+=======
+                        
+>>>>>>> 075f0b1 (Initial commit)
                         console.log(("#exampleModal"))
                         setTimeout(() => {
                             launchLogoCropTool(document.getElementById("img_logo_footer"));
