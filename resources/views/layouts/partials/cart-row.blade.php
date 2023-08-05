@@ -42,7 +42,8 @@ transition: all .4s;
 <a href="{{ action('CartController@view') }}" class="text-center cart_items">
     <button class="relative text-2xl font-semibold text-white rounded-full"
         style="height: 70px; width: 70px;">
-        <span class="absolute text-center item_count text-cart text-dark left-8 top-5" style="padding-inline: 15px; padding-block:5px;  background-color: rgba(0, 0 ,0,.5); color: #fff; border-radius:50%; transform:translatey(5px);  "
+        <span class="absolute item_count text-cart text-dark left-8 top-5" style="padding-inline: 10px; padding-block:3px; transform:translatey(-5px);
+          background-color: rgba(0,0,0,.5); color:#fff; border-radius:3px"
             style="margin-top: 2px;">{{ $cart_count }}</span>
             <i class="fas fa-shopping-cart" style="color: #e1a337; font-size: xx-large;"></i></button>
 </a>

@@ -468,11 +468,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-<<<<<<< HEAD
                     'location' => '//fastly.jsdelivr.net/npm/chart.js',
-=======
-                    'location' => '//cdn.jsdelivr.net/npm/chart.js',
->>>>>>> 075f0b1 (Initial commit)
                 ],
             ],
         ],
