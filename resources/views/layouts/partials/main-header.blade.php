@@ -1,6 +1,6 @@
 <a id="top"></a>
 <div class="w-full flex flex-row bg-center bg-no-repeat  text-center items-center"
-    style="height: 542px;background-size:100% 100%; background-image: url('@if (!empty(session('home_background_image'))) {{ images_asset(asset('uploads/' . session('home_background_image'))) }}@else{{ asset('images/default-home-bg.png') }} @endif')">
+    style="height: 542px;background-size:100% 100%; background-image: url('{{ asset('uploads/' . session('home_background_image')) }}')">
     <div class="w-full">
 
         <div class="flex flex-row mt-2">
