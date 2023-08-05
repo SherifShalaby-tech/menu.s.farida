@@ -11,16 +11,16 @@ if (!empty($user_id)) {
 <div class="flex pb-8 mt-32">
     <div class="flex-1">
     </div>
-    <div class="flex-1 text-center mt-6">
+    <div class="flex-1 mt-6 text-center">
 
     </div>
     <div class="flex-1 text-right ">
-        <a href="#top" class="bg-red text-white font-semibold py-2 px-3 rounded-full mt-10" id="goToTop"  ><i
+        <a href="#top" class="px-3 py-2 mt-10 font-semibold text-white rounded-full bg-red" id="goToTop"  ><i
                 class="fa fa-arrow-up"></i></a>
     </div>
 </div>
 
-<div class="text-center mt-6 " style="    display: flex;
+<div class="mt-6 text-center " style="    display: flex;
 position: fixed;
 width: 120px;
 height: 120px;
@@ -39,10 +39,10 @@ transition: all .4s;
 -webkit-transition: all .4s;
 -o-transition: all .4s;
 -moz-transition: all .4s;">
-<a href="{{ action('CartController@view') }}" class=" text-center cart_items">
-    <button class="text-white font-semibold relative  rounded-full text-2xl"
+<a href="{{ action('CartController@view') }}" class="text-center cart_items">
+    <button class="relative text-2xl font-semibold text-white rounded-full"
         style="height: 70px; width: 70px;">
-        <span class="item_count text-cart text-dark absolute left-8 top-5" style="padding-left: 25px;"
+        <span class="absolute text-center item_count text-cart text-dark left-8 top-5" style="padding-inline: 15px; padding-block:5px;  background-color: rgba(0, 0 ,0,.5); color: #fff; border-radius:50%; transform:translatey(5px);  "
             style="margin-top: 2px;">{{ $cart_count }}</span>
             <i class="fas fa-shopping-cart" style="color: #e1a337; font-size: xx-large;"></i></button>
 </a>
