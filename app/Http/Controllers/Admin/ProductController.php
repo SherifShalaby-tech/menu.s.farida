@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\App;
 class ProductController extends Controller
 {
     /**
@@ -199,7 +199,15 @@ class ProductController extends Controller
         }
 
 
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+           $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
 
         return view('admin.product.index')->with(compact(
             'categories',
@@ -217,7 +225,15 @@ class ProductController extends Controller
             abort(403, __('lang.not_authorized'));
         }
 
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+           $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
         $sizes = Size::orderBy('created_at', 'desc')->pluck('name', 'id');
 
         return view('admin.product.create')->with(compact(
@@ -258,6 +274,7 @@ class ProductController extends Controller
                 $data['barcode_type'] = !empty($data['barcode_type']) ? $data['barcode_type'] : 'C128';
             }
             $data['created_by'] = auth()->user()->id;
+            $data['name'] = isset($request->name) ?$request->name : ' ';
             $data['type'] = !empty($request->this_product_have_variant) ? 'variable' : 'single';
             $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
             $data['details_translations'] = !empty($data['details_translations']) ? $data['details_translations'] : [];
@@ -324,7 +341,15 @@ class ProductController extends Controller
         }
 
         $product = Product::find($id);
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+           $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
         $sizes = Size::orderBy('name', 'asc')->pluck('name', 'id');
 
         return view('admin.product.edit')->with(compact(
@@ -379,6 +404,7 @@ class ProductController extends Controller
                 $data['active'] = !empty($data['active']) ? 1 : 0;
             }
             $data['created_by'] = auth()->user()->id;
+            $data['name'] = isset($request->name) ?$request->name : ' ';
             $data['type'] = !empty($request->this_product_have_variant) ? 'variable' : 'single';
             $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
             $data['details_translations'] = !empty($data['details_translations']) ? $data['details_translations'] : [];
@@ -407,9 +433,9 @@ class ProductController extends Controller
                     }
                 }
             }
-            if(!$request->has('image') || strlen($request->input('image'))==0){
-                $product->clearMediaCollection('product');
-            }
+            // if(!$request->has('image') || strlen($request->input('image'))==0){
+            //     $product->clearMediaCollection('product');
+            // }
 
 
             $data['variations'] = $product->variations->toArray();
