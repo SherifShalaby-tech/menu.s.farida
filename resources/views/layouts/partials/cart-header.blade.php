@@ -9,7 +9,7 @@
                 <p class="font-bold text-4xl text-white">@lang('lang.cart')</p>
             </div>
             <div class="flex-3 w-48 items-end">
-               
+
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                 @endif
 
             </div>
-        </div> 
+        </div>
 
     </div> --}}
 </div>
@@ -33,18 +33,18 @@
 
 
 <div class="container-fluid mx-auto">
-    <div class="flex flex-row">
+    <div class="flex flex-row subMenu">
 
         <div class="flex-3 text-white text-4xl font-bold text-left w-48">
             @include('layouts.partials.language_dropdown')
         </div>
         <div class="flex-1 ">
-         
+
         </div>
 
         <div class="flex-3 text-white  font-bold text-right w-48">
                 <div class="dropdown">
-                    <a href="{{ action('HomeController@index') }}" 
+                    <a href="{{ action('HomeController@index') }}"
                     class="dropbtn bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg">
                         @lang('lang.home') <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-content">

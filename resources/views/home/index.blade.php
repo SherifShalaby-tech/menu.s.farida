@@ -2,11 +2,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
 @section('content')
     <div class="container-fluid mx-auto">
-        <div class="flex flex-row">
-            <div class="flex-3 text-white text-4xl font-bold text-left w-48">
+        <div class="flex flex-row navigation">
+            <div class="text-white text-4xl font-bold text-left w-48 languages">
                 @include('layouts.partials.language_dropdown')
             </div>
-            <div class="flex-1 ">
+            <div class="categories">
                 <div class=" width-fit h-10 bg-red text-white mx-auto text-center md:text-base xs:text-sm   rounded-xl ">
                     <div class="dropdown">
                         <button class="dropbtn text-2xl text-white font-semibold py-1 ">@lang('lang.categories') <i class="fas fa-caret-down"></i></button>
@@ -16,14 +16,14 @@
                             @endforeach
                         </div>
                       </div>
-           
+
                 </div>
             </div>
-            <div class="flex-3 text-white  font-bold text-right w-48">
+            <div class="text-white  font-bold text-right w-48 about">
                 <div class="dropdown">
                     <a class="dropbtn bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg"
                     href="{{ action('AboutUsController@index') }}"> @lang('lang.about_us') <i class="fas fa-caret-down"></i></a>
-                   
+
                     <div class="dropdown-content">
                         <a href="{{ action('HomeController@index') }}" >
                             @lang('lang.home') </a>
@@ -31,8 +31,8 @@
                 </div>
             </div>
         </div>
-     
     </div>
+
     <div class="container mx-auto mt-14">
         @if (!empty($homepage_category_carousel))
             <div class="flex flex-row items-center">
