@@ -15,7 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Pusher\Pusher;
-
+use App\Events\NewOrderEvent;
+use Illuminate\Support\Facades\Http;
 class OrderController extends Controller
 {
     /**
@@ -59,7 +60,7 @@ class OrderController extends Controller
 
             $string = trim(preg_replace('/\s+/', ' ', $request->sales_note));
             $data['sales_note'] = $string;
-            $data['store_id'] =env('ENABLE_POS_SYNC')?$request->store_id:10;
+            $data['store_id'] = env('ENABLE_POS_SYNC')?$request->store_id:0;
             $data['customer_name'] = $request->customer_name;
             $data['phone_number'] = 0;
             $data['address'] = !empty($request->address) ? $request->address : null;
@@ -93,10 +94,10 @@ class OrderController extends Controller
                     'discount' => $discount,
                     'quantity' => $content->attributes->quantity,
                     'price' => $content->price,
-                    'sub_total' => $content->price * $content->attributes->quantity
+                    'sub_total' => $content->price * $content->attributes->quantity,
                 ];
                 $product = Product::find($content->associatedModel->id);
-                $text.=urlencode($product->name).'+'.$content->attributes->size.'%3A+'.$order_details['quantity'] ."%2A".$order_details['price'].'='.$order_details['sub_total']."+".session('currency')['code']. "%0A";
+                $text.=urlencode($product->name).'+'.$content->attributes->size.'+%3A'.$order_details['quantity'] ."+%2A+".$order_details['price'].'='.$order_details['sub_total']."+".session('currency')['code']. "%0A";
                 
                 OrderDetails::create($order_details);
             }
@@ -107,7 +108,8 @@ class OrderController extends Controller
             Cart::where('user_id', $user_id)->delete();
 
             DB::commit();
-            if(env('ENABLE_POS_SYNC')&& !empty($request->table_no)){
+             if(env('ENABLE_POS_SYNC')){
+
                 $options = array(
                     'cluster' =>  env('PUSHER_APP_CLUSTER'),
                     'useTLS' => true
@@ -120,7 +122,7 @@ class OrderController extends Controller
                     env('PUSHER_APP_ID'),
                     $options
                 );
-        
+                if(!empty($request->table_no)){
                 $table=DiningTable::find($order->table_no);
                 $data = [
                     'order_id'=>$order->id,
@@ -128,6 +130,13 @@ class OrderController extends Controller
                     'room_no'=>$table->dining_room_id,
                     'orders_count'=>$order->order_details()->count()
                 ];
+                }else{
+                    $data = [
+                        'order_id'=>$order->id,
+                        'table_no'=>'not exist',
+                        'orders_count'=>$order->order_details()->count()
+                    ];
+                }
                 $pusher->trigger('order-channel', 'new-order', $data);
             }
             //send email for order
@@ -150,36 +159,56 @@ class OrderController extends Controller
 
 
             $site_title = System::getProperty('site_title');
-            $text .= "-----+" . urlencode($site_title) . "+-----%0D%0A+" . __('lang.order_no') . "%3A" . $order->id . "+" . __('lang.total') . "%3A" . $order->final_total . "+" . session('currency')['code'] . "%0D%0A+" . __('lang.quantity') . "+%3A+" . $order->order_details->count();
+            $text .= "-----+" . urlencode($site_title) . "+----- %0D%0A+" . __('lang.order_no') . "%3A" . $order->id . " " . __('lang.total') . "%3A" . $order->final_total . "+" . session('currency')['code'] . "%0D%0A+" . __('lang.quantity') . "%3A" . $order->order_details->count();
             // $text .= "%0D%0A+------------------ %0D%0A+";
-            // $text .= "%0D%0A ------------------+" . urlencode($site_title) . "+------------------ %0D%0A+" . __('lang.order_no') . "+%3A+" . $order->id . " " . __('lang.total') . "+%3A+" . $order->final_total . " " . session('currency')['code'] . " +%0D%0A+" . __('lang.quantity') . "+%3A+" . $order->order_details->count() . "%0D%0A+------------------ %0D%0A+";
             if ($order->order_type == 'order_now') {
                 $text .= __('lang.date_and_time_url') . "+%3A+" . urlencode(date('m/d/Y H:i A'));
             }
 
             if ($order->order_type == 'order_later') {
-                $text .= __('lang.date_and_time_url') . "%3A" . $order->month . '/' . $order->day . '/' . $order->year . '%20' . $order->time;
+                $text .= __('lang.date_and_time_url') . "+%3A+" . $order->month . '/' . $order->day . '/' . $order->year . '%20' . $order->time;
             }
 
             if ($order->delivery_type == 'home_delivery') {
-                $text .= "%0D%0A" . __('lang.home_delivery');
-                $text .= "%0D%0A" . __('lang.address')." ".$order->address;
+                $text .= "%0D%0A+" . __('lang.home_delivery');
+                $text .= "%0D%0A+" . __('lang.address')."+".$order->address;
             }else if($order->delivery_type == 'dining_in'){
-                $text .= "%0D%0A" . __('lang.dinnig_in_restaurant');
-                $text .= "%0D%0A" . __('lang.table_no')." ".$order->table_no;
+                $text .= "%0D%0A+" . __('lang.dinnig_in_restaurant');
+                $text .= "%0D%0A+" . __('lang.table_no')."+".$order->table_no;
             }
             else {
-                $text .= "%0D%0A" . __('lang.i_will_pick_it_up_my_self');
+                $text .= "%0D%0A+" . __('lang.i_will_pick_it_up_my_self');
             }
             if ($order->payment_type == 'cash_on_delivery') {
-                $text .= "%0D%0A" . __('lang.cash_on_delivery');
+                $text .= "%0D%0A+" . __('lang.cash_on_delivery');
             } else {
-                $text .= "%0D%0A" . __('lang.pay_online');
+                $text .= "%0D%0A+" . __('lang.pay_online');
             }
-            $text .= "%0D%0A" . __('lang.customer') . "%3A" . $order->customer_name;
-            // $text .= "%0D%0A" . __('lang.phone_number') . "%3A" . $order->phone_number;
-            $text .= "%0D%0A" . __('lang.note') . "%3A" . $order->sales_note;
+            $text .= "%0D%0A+" . __('lang.customer') . "%3A" . $order->customer_name;
+            // $text .= "%0D%0A+" . __('lang.phone_number') . "%3A" . $order->phone_number;
+            $text .= "%0D%0A+" . __('lang.note') . "%3A" . $order->sales_note;
 
+            $POS_SYSTEM_URL = env('POS_SYSTEM_URL', null);
+            $POS_ACCESS_TOKEN = env('POS_ACCESS_TOKEN', null);
+            $order= Order::where('id', $order->id)->whereNull('pos_transaction_id')->with(['order_details', 'store'])->first()->toArray();
+            $order['dining_table_id'] = null;
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $POS_ACCESS_TOKEN,
+            ])->post($POS_SYSTEM_URL . '/api/order', $order)->json();
+            if (!empty($response['success'])) {
+                $res_data = $response['data'];
+                event(new NewOrderEvent($res_data['id']));
+
+                Order::where('id', $order['id'])->update(['pos_transaction_id' => $res_data['id']]);
+
+                foreach ($res_data['transaction_sell_lines'] as $line) {
+                    OrderDetails::where('id', $line['restaurant_order_detail_id'])->update(['pos_transaction_sell_line_id' => $line['id']]);
+                }
+            }
+            
+            
+            
             $whatsapp = System::getProperty('whatsapp');
             $url = "https://api.whatsapp.com/send/?phone=" . $whatsapp . "&text=" . $text . "&app_absent=0";
             session()->put('order_completed', '1');
@@ -199,6 +228,8 @@ class OrderController extends Controller
             ];
             return redirect()->back()->with('status', $output);
         }
+
+        
     }
 
     /**

@@ -76,7 +76,7 @@ class ProductController extends Controller
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
-                        return '<img src="' . images_asset(asset('/uploads/' . session('logo'))) . '" height="50px" width="50px">';
+                        return '<img src="' . images_asset() . '" height="50px" width="50px">';
                     }
                 })
                 ->editColumn('discount_start_date', '@if(!empty($discount_start_date)){{@format_date($discount_start_date)}}@endif')
@@ -304,13 +304,10 @@ class ProductController extends Controller
            // $this->commonUtil->addSyncDataWithPos('Product', $product, $data, 'POST', 'product');
 
             DB::commit();
-
             $output = [
                 'success' => true,
                 'msg' => __('lang.success')
             ];
-
-
         return redirect()->back()->with('status', $output);
     }
 

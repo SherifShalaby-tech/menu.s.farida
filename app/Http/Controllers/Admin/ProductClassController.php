@@ -56,7 +56,6 @@ class ProductClassController extends Controller
 
             $product_classes = $product_classes->selectRaw(
                 'product_classes.*,count("products.id") as product_count'
-
             );
 
             return DataTables::of($product_classes)
@@ -65,7 +64,7 @@ class ProductClassController extends Controller
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
-                        return '<img src="' . images_asset(asset('/uploads/' . session('logo'))) . '" height="50px" width="50px">';
+                        return '<img src="' . images_asset() . '" height="50px" width="50px">';
                     }
                 })
                 ->editColumn('status', function ($row) {
@@ -77,10 +76,9 @@ class ProductClassController extends Controller
                 })
                 ->addColumn('products_count', function ($row) {
                     return $row->product_count;
-                })
-                ->addColumn(
+                })->addColumn(
                     'action',
-                    function ($row) {
+                    function ($row){
                         $html =
                             '<div class="btn-group">
                             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
